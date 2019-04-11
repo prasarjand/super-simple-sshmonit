@@ -26,5 +26,8 @@ after that on server group it will only copy server.ssh into server vm and autom
 
 and then on client group it will copy client.sh to /etc/profile.d/ and make it executeable
 
+#### demo
 
+server side : https://asciinema.org/a/USTiB4Zbu90eZBPYhlelsAgKz
+client side : https://asciinema.org/a/VJtgXBVPGnATS87xZp2aOhClA
 
