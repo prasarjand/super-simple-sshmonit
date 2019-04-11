@@ -28,6 +28,7 @@ and then on client group it will copy client.sh to /etc/profile.d/ and make it e
 
 #### demo
 
-server side : https://asciinema.org/a/USTiB4Zbu90eZBPYhlelsAgKz
-client side : https://asciinema.org/a/VJtgXBVPGnATS87xZp2aOhClA
+- server side : https://asciinema.org/a/USTiB4Zbu90eZBPYhlelsAgKz
+- client side : https://asciinema.org/a/VJtgXBVPGnATS87xZp2aOhClA
+- ansible deploy: https://asciinema.org/a/R3lheSw7mS7SI9gWEYDU3gHmF
 
