@@ -5,5 +5,5 @@ if [ -n "$SSH_CLIENT" ]; then
         SRV_HOSTNAME=$(hostname -f)
         REPORT="$SRV_HOSTNAME had ssh attempt from $CLIENT_IP as $USER"
 
-        nc 46.51.220.145 8999  <<< $REPORT
+        nc 128.199.249.43 8000  <<< $REPORT
 fi

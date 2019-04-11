@@ -1,0 +1,50 @@
+- hosts: server:client
+  user: root
+  
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  - name: inatall ufw
+    apt: package=ufw state=present
+
+  - name: configure ufw default
+    ufw: direction={{ item.direction }} policy={{ item.policy }}
+    with_items:
+      - { direction: 'incoming', policy: 'deny' }
+      - { direction: 'outgoing', policy: 'allow' }
+    
+  - name: configure ufw rules
+    ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }} 
+    with_items:
+      - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp' }
+      - { rule: 'allow', port: '8000', proto: 'tcp' }
+      - { rule: 'allow', port: '8000', proto: 'udp' }
+
+  - name: Enable ufw logging
+    ufw: logging=on
+
+  - name: Enable ufw
+    ufw: state=enabled
+
+- hosts: server
+  user: root
+  
+  tasks:
+  - name: copy server.sh 
+    copy: src=../server.sh dest=/root
+  - name: make excuteablr
+    raw: chmod +x /root/server.sh
+  - name: modify bashrc
+    raw:  echo -e 'if [[ -n $SSH_CONNECTION ]]; then \n 
+     bash server.sh \n
+      fi'  >> /root/.bashrc
+
+- hosts: client
+  user: root
+  
+  tasks:
+  - name: copy client.sh to profile.d 
+    copy: src=../client.sh dest=/etc/profile.d/
+  - name: make excuteablr
+    raw: chmod +x /etc/profile.d/client.sh
