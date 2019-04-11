@@ -1,4 +1,5 @@
 - hosts: server:client
+  gather_facts: False
   user: root
   
   tasks:
